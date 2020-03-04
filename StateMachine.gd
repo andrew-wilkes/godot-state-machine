@@ -11,8 +11,9 @@ var history = []
 func _ready():
 	# Set the initial state to the first child node
 	state = get_child(0)
-	_enter_state()
-	
+	call_deferred("_enter_state")
+
+
 func change_to(new_state):
 	history.append(state.name)
 	state = get_node(new_state)
@@ -53,5 +54,6 @@ func _unhandled_key_input(event):
 		state.unhandled_key_input(event)
 
 func _notification(what):
-	if state && state.has_method("notification"):
-		state.notification(what)
+	if state:
+		if state.has_method("notification"):
+			state.notification(what)
