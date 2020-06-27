@@ -11,22 +11,25 @@ func enter():
 func exit(next_state):
 	fsm.change_to(next_state)
 
-# Optional handler functions for game loop events
-func process(delta):
-	# Add handler code here
-	return delta
+####################################################
+### Optional handler functions for game loop events.
+### Delete the ones that you don't need.
+####################################################
+func process(_delta):
+	# Replace pass with your handler code
+	pass
 
-func physics_process(delta):
-	return delta
+func physics_process(_delta):
+	pass
 
-func input(event):
-	return event
+func input(_event):
+	pass
 
-func unhandled_input(event):
-	return event
+func unhandled_input(_event):
+	pass
 
-func unhandled_key_input(event):
-	return event
+func unhandled_key_input(_event):
+	pass
 
-func notification(what, flag = false):
-	return [what, flag]
+func notification(_what, _flag = false):
+	pass
