@@ -23,7 +23,7 @@ func change_to(new_state):
 
 func back():
 	if history.size() > 0:
-		state = get_node(history.pop_back())
+		state = get_node(NodePath(history.pop_back()))
 		_enter_state()
 
 
@@ -59,8 +59,3 @@ func _unhandled_input(event):
 func _unhandled_key_input(event):
 	if state.has_method("unhandled_key_input"):
 		state.unhandled_key_input(event)
-
-
-func _notification(what):
-	if state and state.has_method("notification"):
-			state.notification(what)
