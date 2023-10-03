@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dw32hq8o7be1d"]
 
-[ext_resource path="res://StateMachine.gd" type="Script" id=1]
-[ext_resource path="res://State1.gd" type="Script" id=2]
-[ext_resource path="res://State2.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://StateMachine.gd" id="1"]
+[ext_resource type="Script" path="res://State1.gd" id="2"]
+[ext_resource type="Script" path="res://State2.gd" id="3"]
 
 [node name="StateMachine" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="State1" type="Node" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="State2" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")

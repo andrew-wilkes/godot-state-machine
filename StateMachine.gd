@@ -4,63 +4,45 @@ class_name StateMachine
 
 const DEBUG = true
 
-var state: Object
+var current_state: Object
 
 var history = []
+var states = []
 
 func _ready():
+	states = get_children()
 	# Set the initial state to the first child node
-	state = get_child(0)
+	set_state(states[0].name)
 	# Allow for all nodes to be ready before calling _enter_state
-	call_deferred("_enter_state")
+	#call_deferred("_enter_state")
 
 
-func change_to(new_state):
-	history.append(state.name)
-	state = get_node(new_state)
-	_enter_state()
+func change_to(new_state_id):
+	history.append(new_state_id)
+	call_deferred("set_state", new_state_id)
+
 
 
 func back():
 	if history.size() > 0:
-		state = get_node(history.pop_back())
-		_enter_state()
+		call_deferred("set_state", history.pop_back())
 
 
 func _enter_state():
 	if DEBUG:
-		print("Entering state: ", state.name)
+		print("Entering state: ", current_state.name)
 	# Give the new state a reference to it's state machine i.e. this one
-	state.fsm = self
-	state.enter()
+	current_state.fsm = self
+	current_state.enter()
 
 
-# Route Game Loop function calls to
-# current state handler method if it exists
-func _process(delta):
-	if state.has_method("process"):
-		state.process(delta)
-
-
-func _physics_process(delta):
-	if state.has_method("physics_process"):
-		state.physics_process(delta)
-
-
-func _input(event):
-	if state.has_method("input"):
-		state.input(event)
-
-func _unhandled_input(event):
-	if state.has_method("unhandled_input"):
-		state.unhandled_input(event)
-
-
-func _unhandled_key_input(event):
-	if state.has_method("unhandled_key_input"):
-		state.unhandled_key_input(event)
-
-
-func _notification(what):
-	if state and state.has_method("notification"):
-			state.notification(what)
+func set_state(state_name):
+	for a_state in states:
+		if a_state.name == state_name:
+			current_state = a_state
+			if not a_state.get_parent():
+				add_child(a_state)
+		else:
+			if a_state.get_parent():
+				remove_child(a_state)
+	_enter_state()

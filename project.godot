@@ -6,22 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Node",
-"class": "StateMachine",
-"language": "GDScript",
-"path": "res://StateMachine.gd"
-} ]
-_global_script_class_icons={
-"StateMachine": ""
-}
+config_version=5
 
 [application]
 
 config/name="State Machine"
 run/main_scene="res://StateMachine.tscn"
+config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
 [rendering]
